@@ -1,0 +1,116 @@
+.Post {
+  max-width: 600px;
+  margin-top: 21px;
+  border: 1px solid rgba(239, 239, 239, 1);
+  border-radius: 2px;
+  overflow: hidden;
+  &__avatar {
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    padding: 14px 0 0 20px;
+  }
+  &__image {
+    width: 100%;
+    height: 600px;
+    background-color: rgba(196, 196, 196, 1);
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(196, 196, 196, 1);
+  }
+
+  &__text {
+    width: 600px;
+    height: 249px;
+    background-color: white;
+  }
+
+  &__icons {
+    padding: 18px 0 0 0;
+    margin: 0 24px 0 20.5px;
+    display: flex;
+    margin-left: 20.5px;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+  }
+
+  &__likes {
+    margin: 17px 0 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+
+  &__comments {
+    margin: 0 0px 0 20px;
+
+    p {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 18px;
+      margin: 0 3px 0 0px;
+
+      span {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+      }
+    }
+  }
+
+  &__createdAt {
+    margin: 10px 0px 0 20px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    color: rgba(142, 142, 142, 1);
+    text-transform: uppercase;
+  }
+
+  &__input {
+    width: 100%;
+    height: 61px;
+    border-top: 1px solid rgba(239, 239, 239, 1);
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+
+    input {
+      padding: 0 0 0 24px;
+      border: none;
+      width: calc(100% - 120px);
+      height: 61px;
+    }
+
+    .smile {
+      width: 65px;
+      height: 64px;
+    }
+
+    button {
+      border: none;
+      background: white;
+      height: 61px;
+      width: 55px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16px;
+      color: rgba(0, 149, 246, 0.25);
+    }
+  }
+}
