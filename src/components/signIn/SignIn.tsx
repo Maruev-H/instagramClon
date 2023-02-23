@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { signIn } from "../../store/reducers/user/instagramActions";
+import {signIn } from "../../store/reducers/user/instagramActions";
+import instLogo from '../../pictures/instagram.jpg'
 import "./SignIn.scss";
 
 export default function SignIn() {
 
+  const location = useLocation()
+
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { token } = useAppSelector((state) => state.posts.currentUser)
+  const { isAuth } = useAppSelector((state) => state.posts)
   const { isLoading} = useAppSelector((state) => state.posts)
 
   function handleChangeUserName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -26,7 +29,8 @@ export default function SignIn() {
 
   return (
     <div className="Form_auth">
-      <img src={require('../../pictures/instagram.jpg')} alt="s" />
+      {isLoading && <div className="Loader">Loading...</div>}
+      <img src={instLogo} alt="s" />
       <br></br>
       <form>
         <input
@@ -46,11 +50,11 @@ export default function SignIn() {
           onChange={handleChangePassword}
         />
         <br></br>
-        <button disabled={(!username || !password) || isLoading} className="btn btn-primary inp" type="button" onClick={handleClick}>
+        <button disabled={(!username || !password)} className="btn btn-primary inp" type="button" onClick={handleClick}>
           Войти
         </button>
       </form>
-      {!!token && <Navigate to="/"/>}
+      {isAuth && <Navigate to="/" state={{ from: location }} />}
     </div>
   );
 }

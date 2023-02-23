@@ -10,6 +10,8 @@ import { BiSearch } from "react-icons/bi";
 import { useAppDispatch } from "../../hooks/hooks";
 import { getPosts } from "../../store/reducers/user/instagramActions";
 import Posts from "../Posts/Posts";
+import { NavLink } from "react-router-dom";
+import instLogo from '../../pictures/instagram.jpg'
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
@@ -22,7 +24,7 @@ export default function HomePage() {
     <div>
       <header>
         <div className="Image">
-          <img src={require("../../pictures/instagram.jpg")} alt="" />
+          <img src={instLogo} alt="" />
         </div>
 
         <div className="search">
@@ -32,9 +34,15 @@ export default function HomePage() {
           </label>
         </div>
         <div className="icons">
-          <img src={home} alt="" />
+          <NavLink to="/">
+            <img src={home} alt="" />
+          </NavLink>
+
           <img src={message} alt="" />
-          <img src={add} alt="" />
+          <NavLink to="/post">
+            {" "}
+            <img src={add} alt="" />
+          </NavLink>
           <img src={trends} alt="" />
           <img src={heart} alt="" />
           <img src={ellipse} alt="" />

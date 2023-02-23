@@ -1,18 +1,22 @@
-import React, {useEffect}from 'react';
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Auth from "./components/Auth/Auth";
 import HomePage from "./components/HomePage/HomePage";
+import AddPost from "./components/NewPostForm/AddPost";
 import SignIn from "./components/signIn/SignIn";
 import { useAppDispatch, useAppSelector } from "./hooks/hooks";
-import { getUser } from './store/reducers/user/instagramActions';
+import { getUser } from "./store/reducers/user/instagramActions";
 
 function App() {
+
   const dispatch = useAppDispatch();
-  useEffect(()=>{
-    dispatch(getUser())
-  }, [dispatch])
+  const { isAuth } = useAppSelector((state) => state.posts);
   
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Routes>
@@ -25,6 +29,7 @@ function App() {
           }
         />
         <Route path="/login" element={<SignIn />} />
+        {isAuth && <Route path="/post" element={<AddPost />} />}
       </Routes>
     </div>
   );

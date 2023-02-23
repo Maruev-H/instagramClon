@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { IPosts } from "../../types/IData";
 import "./Post.scss";
 import like from "../../pictures/PostIcons/likes.png";
@@ -10,19 +10,23 @@ import ReadMore from "../ReadMoreBtn/ReadMore";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-const Post: React.FC<IPosts> = ({ image, likes, comments, created_at }) => { 
-
-  dayjs.extend(relativeTime);
+const Post: React.FC<IPosts> = ({ image, likes, comments, created_at, description }) => { 
 
   const whatTime = () => {
+    dayjs.extend(relativeTime);
     return dayjs(Number(created_at)).fromNow(); 
   };
 
+  const [comment, setComment] = useState('')
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    setComment(event.target.value)
+  }
 
   return (
     <div className="Post">
       <div className="Post__avatar">
-        <div className="Post__img"></div>
+        <div className="Post__img"><p>username</p></div>
       </div>
       <div className="Post__image">
         <img src={image} alt="d" />
@@ -49,7 +53,7 @@ const Post: React.FC<IPosts> = ({ image, likes, comments, created_at }) => {
         </div>
         <div className="Post__comments">
           <p>username</p>
-          <ReadMore len={250}>{comments[1] || ''}</ReadMore>
+          <ReadMore len={250}>{description}</ReadMore>
         </div>
         <div className="Post__createdAt">
           {whatTime()}
@@ -59,8 +63,8 @@ const Post: React.FC<IPosts> = ({ image, likes, comments, created_at }) => {
         <button className="smile">
           <img src={smile} alt="" />
         </button>
-        <input placeholder="Add a comment"/>
-        <button>post</button>
+        <input placeholder="Add a comment" value={comment} onChange={handleChange}/>
+        <button disabled={!comment}>post</button>
       </div>
     </div>
   );

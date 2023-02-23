@@ -1,5 +1,5 @@
 import { createSlice,} from "@reduxjs/toolkit";
-import { stat } from "fs";
+import { useCookies } from "react-cookie";
 import { postState } from "../../../types/IData";
 import { getPosts, getUser, signIn } from "./instagramActions";
 
@@ -20,6 +20,7 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
     builder.addCase(signIn.pending, (state) => {
       state.isLoading = true
     });
@@ -32,9 +33,10 @@ export const todoSlice = createSlice({
     });
 
     builder.addCase(signIn.rejected, (state, action) => {
-      console.log(action.payload);
+      console.log("неправильный логин или пароль");
+      state.isAuth = false;
     });
-
+    
     builder.addCase(getPosts.pending, (state, action) => {
       state.isLoading = true
     });
@@ -48,21 +50,24 @@ export const todoSlice = createSlice({
       console.log(action.payload);
     });
 
-    // builder.addCase(getUser.pending, (state) => {
-    //   state.isLoading = true
-    // });
+    builder.addCase(getUser.pending, (state) => {
+      state.isLoading = true
+      state.isAuth = false
+      console.log("ожидание")
+    });
     
-    // builder.addCase(getUser.fulfilled, (state, action) => {
-    //   state.isAuth = true;
-    //   state.isLoading = false;
-    //   state.currentUser = action.payload
-    //   localStorage.setItem('token', action.payload.token)
-    // });
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      state.isAuth = true;
+      state.isLoading = false;
+      state.currentUser = action.payload
+      console.log("авторизирован")
+    });
     
-    // builder.addCase(getUser.rejected, (state) => {
-    //   localStorage.removeItem('token')
-    //   state.isLoading = false
-    // });
+    builder.addCase(getUser.rejected, (state) => {
+      localStorage.removeItem('token')
+      state.isLoading = false
+      console.log("токен был удален")
+    });
   },
 });
 

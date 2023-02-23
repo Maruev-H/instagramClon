@@ -1,5 +1,4 @@
 import React  from "react"
-import { useSelector } from "react-redux"
 import { Navigate, useLocation } from "react-router-dom"
 import { useAppSelector } from "../../hooks/hooks"
 
@@ -11,9 +10,11 @@ const Auth:React.FC<AuthProps> = ({children}) => {
   
   const location = useLocation()
 
-  const { token } = useAppSelector((state) => state.posts.currentUser)
+  const { isAuth } = useAppSelector((state) => state.posts)
+
+  console.log(isAuth)
   
-  if (!token) {
+  if (!isAuth) {
     return <Navigate to="/login" state={{ from: location }} />
   }
 
