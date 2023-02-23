@@ -10,9 +10,7 @@ const Auth:React.FC<AuthProps> = ({children}) => {
   
   const location = useLocation()
 
-  const { isAuth } = useAppSelector((state) => state.posts)
-
-  console.log(isAuth)
+  const { isAuth } = useAppSelector((state) => state.user)
   
   if (!isAuth) {
     return <Navigate to="/login" state={{ from: location }} />

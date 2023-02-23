@@ -3,13 +3,22 @@ export interface IPosts {
   description: string;
   comments: string[];
   image: string;
-  user: string;
+  user: {
+    _id: string;
+    username: string;
+    avatar: string;
+  }
   created_at: number;
   likes: number;
+
 }
 
 export type postState = {
   posts: IPosts[];
+  isLoadingPosts: boolean
+}
+
+export type userState = {
   currentUser: Ilogin,
   isAuth: boolean
   isLoading: boolean

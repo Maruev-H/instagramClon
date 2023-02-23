@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import {signIn } from "../../store/reducers/user/instagramActions";
+import {signIn } from "../../store/reducers/user/userActions";
 import instLogo from '../../pictures/instagram.jpg'
 import "./SignIn.scss";
 
@@ -12,8 +12,7 @@ export default function SignIn() {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isAuth } = useAppSelector((state) => state.posts)
-  const { isLoading} = useAppSelector((state) => state.posts)
+  const { isAuth, isLoading } = useAppSelector((state) => state.user)
 
   function handleChangeUserName(event: React.ChangeEvent<HTMLInputElement>) {
     setUsername(event.target.value);

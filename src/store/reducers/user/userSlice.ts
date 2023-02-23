@@ -1,12 +1,11 @@
 import { createSlice,} from "@reduxjs/toolkit";
-import { useCookies } from "react-cookie";
-import { postState } from "../../../types/IData";
-import { getPosts, getUser, signIn } from "./instagramActions";
+import { cookies } from "../../../baseServis/baseService";
+import { userState } from "../../../types/IData";
+import { getUser, signIn } from "./userActions";
 
-const initialState: postState = {
-  posts: [],
+const initialState: userState = {
   currentUser: {
-    token: localStorage.getItem('token') || '',
+    token: cookies.get('token') || '',
     username: "",
     _id: "",
     avatar: "",
@@ -16,7 +15,7 @@ const initialState: postState = {
 };
 
 export const todoSlice = createSlice({
-  name: "todo",
+  name: "user",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -29,7 +28,6 @@ export const todoSlice = createSlice({
       state.isAuth = true;
       state.isLoading = false;
       state.currentUser = action.payload
-      localStorage.setItem('token', action.payload.token)
     });
 
     builder.addCase(signIn.rejected, (state, action) => {
@@ -37,19 +35,6 @@ export const todoSlice = createSlice({
       state.isAuth = false;
     });
     
-    builder.addCase(getPosts.pending, (state, action) => {
-      state.isLoading = true
-    });
-
-    builder.addCase(getPosts.fulfilled, (state, action) => {
-      state.posts = action.payload
-      state.isLoading = false
-    });
-
-    builder.addCase(getPosts.rejected, (state, action) => {
-      console.log(action.payload);
-    });
-
     builder.addCase(getUser.pending, (state) => {
       state.isLoading = true
       state.isAuth = false

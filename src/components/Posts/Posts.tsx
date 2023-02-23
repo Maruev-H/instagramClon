@@ -7,7 +7,7 @@ export default function Posts() {
     const {posts} = useAppSelector((state) => state.posts)
 
   return (
-    <div>
+    <div className="Content">
       {posts.map((item)=>(
         <Post key={item._id} {...item}/>
       ))}

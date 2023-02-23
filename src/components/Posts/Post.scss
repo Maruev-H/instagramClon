@@ -14,8 +14,38 @@
 
   &__image {
     width: 100%;
-    height: 600px;
     background-color: rgba(196, 196, 196, 1);
+    img {
+      width: 100%;
+    }
+  }
+
+  &__change {
+    display: flex;
+    border: none;
+    background: none;
+    width: 15px;
+    justify-content: space-between;
+    padding: 0;
+    margin-left: auto;
+    margin-right: 24.5px;
+
+    .butt {
+      background-color: black;
+      height: 3px;
+      width: 3px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+  }
+
+  &__ava {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(196, 196, 196, 1);
+    overflow: hidden;
+
     img {
       width: 100%;
       height: 100%;
@@ -30,17 +60,8 @@
     align-items: center;
     height: 32px;
 
-    p{
-        margin: 0 0 0 14px;
-    }
-
-    &::before {
-      content: "";
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background-color: rgba(196, 196, 196, 1);
+    p {
+      margin: 0 0 0 14px;
     }
   }
 
@@ -137,6 +158,39 @@
       &:disabled {
         color: rgba(0, 149, 246, 0.25);
       }
+    }
+  }
+
+  &__changer {
+    position: relative;
+    margin-left: auto;
+    margin-right: 24.5px;
+    height: 3px;
+    width: 15px;
+
+    .PostChangeButton {
+      position: absolute;
+      color: white;
+      height: 26px;
+      width: 116px;
+      border-radius: 20px;
+      background-color: rgba(43, 49, 56, 1);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 13px;
+      border: none;
+      right: -24px;
+    }
+
+    .none{
+      display: none;
+    }
+
+    .first{
+      top: 10.24px
+    }
+    .second {
+      top: 40.24px;
     }
   }
 }

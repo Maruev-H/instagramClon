@@ -1,1 +1,0 @@
- export const baseUrl = 'https://unicode-unigram.onrender.com'
