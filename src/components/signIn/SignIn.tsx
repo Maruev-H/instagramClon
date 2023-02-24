@@ -12,7 +12,7 @@ export default function SignIn() {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isAuth, isLoading } = useAppSelector((state) => state.user)
+  const { isAuth } = useAppSelector((state) => state.user)
 
   function handleChangeUserName(event: React.ChangeEvent<HTMLInputElement>) {
     setUsername(event.target.value);
@@ -28,7 +28,6 @@ export default function SignIn() {
 
   return (
     <div className="Form_auth">
-      {isLoading && <div className="Loader">Loading...</div>}
       <img src={instLogo} alt="s" />
       <br></br>
       <form>

@@ -20,25 +20,6 @@
     }
   }
 
-  &__change {
-    display: flex;
-    border: none;
-    background: none;
-    width: 15px;
-    justify-content: space-between;
-    padding: 0;
-    margin-left: auto;
-    margin-right: 24.5px;
-
-    .butt {
-      background-color: black;
-      height: 3px;
-      width: 3px;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-  }
-
   &__ava {
     width: 32px;
     height: 32px;
@@ -90,10 +71,13 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
   }
 
   &__comments {
-    margin: 0 0px 0 20px;
+    padding: 0 20px;
 
     p {
       display: inline-block;
@@ -101,12 +85,18 @@
       font-weight: 600;
       line-height: 18px;
       margin: 0 3px 0 0px;
+    }
 
-      span {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 16px;
-      }
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 16px;
+    }
+    .ReadMore {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 18px;
+      color: rgba(142, 142, 142, 1);
     }
   }
 
@@ -161,11 +151,31 @@
     }
   }
 
+  &__change {
+    display: flex;
+    border: none;
+    background: none;
+    width: 15px;
+    justify-content: space-between;
+    padding: 0;
+    margin-left: auto;
+    margin-right: 24.5px;
+    height: 32px;
+    padding-top: calc(100% - 3px);
+
+    .butt {
+      background-color: black;
+      height: 3px;
+      width: 3px;
+      border-radius: 50%;
+    }
+  }
+
   &__changer {
     position: relative;
     margin-left: auto;
     margin-right: 24.5px;
-    height: 3px;
+    height: 32px;
     width: 15px;
 
     .PostChangeButton {
@@ -182,15 +192,15 @@
       right: -24px;
     }
 
-    .none{
+    .none {
       display: none;
     }
 
-    .first{
-      top: 10.24px
+    .first {
+      top: 18.24px;
     }
     .second {
-      top: 40.24px;
+      top: 48.24px;
     }
   }
 }

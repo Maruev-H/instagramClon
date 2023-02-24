@@ -9,16 +9,18 @@ import { useAppDispatch, useAppSelector } from "./hooks/hooks";
 import { getUser } from "./store/reducers/user/userActions";
 
 function App() {
-
   const dispatch = useAppDispatch();
-  const { isAuth } = useAppSelector((state) => state.user);
-  
+  const { isLoading } = useAppSelector((state) => state.user);
+
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
 
   return (
     <div className="App">
+      {isLoading && <div className="Loader">
+        <div>Loading...</div>
+        </div>}
       <Routes>
         <Route
           path="/"
@@ -29,7 +31,6 @@ function App() {
           }
         />
         <Route path="/login" element={<SignIn />} />
-        {isAuth && <Route path="/post" element={<AddPost />} />}
       </Routes>
     </div>
   );

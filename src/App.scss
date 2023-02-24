@@ -2,7 +2,21 @@
   font-family: "Roboto", sans-serif;
   max-width: 1440px;
   margin: auto;
-  background-color: #E5E5E5;
+  background-color: rgba(249, 249, 249, 1);
+}
+
+.Loader{
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba($color: black, $alpha: 0.75);
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  font-size: 100px;
+  color: white;
+  left: 0;
+  top: 0;
 }
 
 @keyframes spin {

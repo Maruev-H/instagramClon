@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { deletePost } from "../../store/reducers/posts/postsActions";
+import  {editPost}  from '../../store/reducers/posts/PostsSlice'
 
 const Post: React.FC<IPosts> = ({
   image,
@@ -21,17 +22,21 @@ const Post: React.FC<IPosts> = ({
   comments,
   _id,
 }) => {
-  
   const [comment, setComment] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComment(event.target.value);
   };
   const { username } = useAppSelector((state) => state.user.currentUser);
   const [changePost, setChangePost] = useState(false);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const postDelete = () =>{
-    dispatch(deletePost(_id))
+
+  const postDelete = () => {
+    dispatch(deletePost(_id));
+  };
+
+  const editPosts = () =>{
+    dispatch(editPost(_id))
   }
 
   const whatTime = () => {
@@ -50,13 +55,34 @@ const Post: React.FC<IPosts> = ({
           <div className="Post__changer">
             {username === user.username && (
               <>
-                <button className="Post__change" onClick={()=>{setChangePost(!changePost)}}>
+                <button
+                  className="Post__change"
+                  onClick={() => {
+                    setChangePost(!changePost);
+                  }}
+                >
                   <div className="butt"></div>
                   <div className="butt"></div>
                   <div className="butt"></div>
                 </button>
-                <button className={`PostChangeButton first ${changePost ? 'block' : 'none'}`}>Edit</button><br/>
-                <button  onClick={postDelete} className={`PostChangeButton second ${changePost ? 'block' : 'none'}`}>Delete</button>
+                <a href="#Edit">
+                  <button onClick={editPosts}
+                    className={`PostChangeButton first ${
+                      changePost ? "block" : "none"
+                    }`}
+                  >
+                    Edit
+                  </button>
+                </a>
+                <br />
+                <button
+                  onClick={postDelete}
+                  className={`PostChangeButton second ${
+                    changePost ? "block" : "none"
+                  }`}
+                >
+                  Delete
+                </button>
               </>
             )}
           </div>

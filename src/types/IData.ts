@@ -15,7 +15,8 @@ export interface IPosts {
 
 export type postState = {
   posts: IPosts[];
-  isLoadingPosts: boolean
+  isLoadingPosts: boolean;
+  editPostId: string;
 }
 
 export type userState = {

@@ -19,12 +19,10 @@ const  ReadMore:React.FC<ReadMore> = ({ children, len }) => {
 
   return (
     <>
-      <span>{isReadMore ? children : `${children.substring(0, len)}...`}</span>
-      <div>
-        <p onClick={readMoreBtn} className="ReadMore">
-          {isReadMore ? "less" : "more..."}
-        </p>
-      </div>
+      <span>{isReadMore ? children : `${children.substring(0, len)}`}</span>
+        <span onClick={readMoreBtn} className="ReadMore">
+          {isReadMore ? "less" : "...more"}
+        </span>
     </>
   );
 }

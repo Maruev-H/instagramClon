@@ -1,20 +1,19 @@
 import React from "react";
-import home from "../../../pictures/icons/home.png";
-import message from "../../../pictures/icons/msg.png";
-import add from "../../../pictures/icons/add.png";
-import trends from "../../../pictures/icons/trends.png";
-import heart from "../../../pictures/icons/Vector1.png";
+import home from "../../pictures/icons/home.png";
+import message from "../../pictures/icons/msg.png";
+import add from "../../pictures/icons/add.png";
+import trends from "../../pictures/icons/trends.png";
+import heart from "../../pictures/icons/Vector1.png";
 import { BiSearch } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
-import instLogo from "../../../pictures/instagram.jpg";
-import { useAppSelector } from "../../../hooks/hooks";
+import instLogo from "../../pictures/instagram.jpg";
+import { useAppSelector } from "../../hooks/hooks";
 
 const Header = () => {
-  
   const { avatar } = useAppSelector((state) => state.user.currentUser);
 
   return (
-    <header>
+    <header id="header">
       <div className="Image">
         <img src={instLogo} alt="" />
       </div>
@@ -30,10 +29,10 @@ const Header = () => {
         </NavLink>
 
         <img src={message} alt="" />
-        <NavLink to="/post">
+        <a href="#PopUp">
           {" "}
           <img src={add} alt="" />
-        </NavLink>
+        </a>
         <img src={trends} alt="" />
         <img src={heart} alt="" />
         <div>
