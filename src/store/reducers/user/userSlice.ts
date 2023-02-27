@@ -19,7 +19,8 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
+    
+    // авторизация
     builder.addCase(signIn.pending, (state) => {
       state.isLoading = true
     });
@@ -34,7 +35,9 @@ export const todoSlice = createSlice({
       console.log("неправильный логин или пароль");
       state.isAuth = false;
     });
-    
+     /* -------------------------------------------------------------------------------------------------------- */
+
+     //проверка токена
     builder.addCase(getUser.pending, (state) => {
       state.isLoading = true
       state.isAuth = false
@@ -54,6 +57,6 @@ export const todoSlice = createSlice({
       console.log("токен был удален")
     });
   },
+   /* -------------------------------------------------------------------------------------------------------- */
 });
-
 export default todoSlice.reducer;

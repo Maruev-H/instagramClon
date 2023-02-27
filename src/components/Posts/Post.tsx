@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IPosts } from "../../types/IData";
 import "./Post.scss";
 import like from "../../pictures/PostIcons/likes.png";
@@ -11,8 +11,12 @@ import ReadMore from "../ReadMoreBtn/ReadMore";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { deletePost, postLike, postUnLike } from "../../store/reducers/posts/postsActions";
-import  {editPost}  from '../../store/reducers/posts/PostsSlice'
+import {
+  deletePost,
+  postLike,
+  postUnLike,
+} from "../../store/reducers/posts/postsActions";
+import { editPost } from "../../store/reducers/posts/PostsSlice";
 
 const Post: React.FC<IPosts> = ({
   image,
@@ -27,26 +31,33 @@ const Post: React.FC<IPosts> = ({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComment(event.target.value);
   };
-  const { currentUser} = useAppSelector((state) => state.user);
+  const { currentUser } = useAppSelector((state) => state.user);
   const [changePost, setChangePost] = useState(false);
   const dispatch = useAppDispatch();
-
 
   const postDelete = () => {
     dispatch(deletePost(_id));
   };
 
-  const editPosts = () =>{
-    dispatch(editPost(_id))
-  }
+  const editPosts = () => {
+    dispatch(editPost(_id));
+  };
 
-  const likeOrUnlikePost = () =>{
-    if(likes.includes(currentUser._id)){
-      dispatch(postUnLike({_id,  userId: currentUser._id}))
-    }else{
-      dispatch(postLike({_id,  userId: currentUser._id}))
+  const likeOrUnlikePost = () => {
+    if (likes.includes(currentUser._id)) {
+      dispatch(postUnLike({ _id, userId: currentUser._id }));
+    } else {
+      dispatch(postLike({ _id, userId: currentUser._id }));
     }
-  }
+    console.log('asfas')
+    setButtonDisabled(true);
+    setTimeout(() => {
+      setButtonDisabled(false);
+      console.log('timeout')
+    }, 3000);
+  };
+
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const whatTime = () => {
     dayjs.extend(relativeTime);
@@ -75,7 +86,8 @@ const Post: React.FC<IPosts> = ({
                   <div className="butt"></div>
                 </button>
                 <a href="#Edit">
-                  <button onClick={editPosts}
+                  <button
+                    onClick={editPosts}
                     className={`PostChangeButton first ${
                       changePost ? "block" : "none"
                     }`}
@@ -103,8 +115,11 @@ const Post: React.FC<IPosts> = ({
       <div className="Post__text">
         <div className="Post__icons">
           <div className="Post__left">
-            <button onClick={likeOrUnlikePost}>
-              <img src={`${likes.includes(currentUser._id) ? likeTrue : like}`} alt="" />
+            <button onClick={likeOrUnlikePost} disabled={buttonDisabled}>
+              <img
+                src={`${likes.includes(currentUser._id) ? likeTrue : like}`}
+                alt=""
+              />
             </button>
             <button>
               <img src={komments} alt="" />
