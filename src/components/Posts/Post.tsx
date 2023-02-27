@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IPosts } from "../../types/IData";
 import "./Post.scss";
 import like from "../../pictures/PostIcons/likes.png";
+import likeTrue from "../../pictures/PostIcons/likeTrue.png";
 import komments from "../../pictures/PostIcons/komments.png";
 import share from "../../pictures/PostIcons/share.png";
 import favorit from "../../pictures/PostIcons/Vector.png";
@@ -10,7 +11,7 @@ import ReadMore from "../ReadMoreBtn/ReadMore";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { deletePost } from "../../store/reducers/posts/postsActions";
+import { deletePost, postLike, postUnLike } from "../../store/reducers/posts/postsActions";
 import  {editPost}  from '../../store/reducers/posts/PostsSlice'
 
 const Post: React.FC<IPosts> = ({
@@ -26,7 +27,7 @@ const Post: React.FC<IPosts> = ({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComment(event.target.value);
   };
-  const { username } = useAppSelector((state) => state.user.currentUser);
+  const { currentUser} = useAppSelector((state) => state.user);
   const [changePost, setChangePost] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -37,6 +38,14 @@ const Post: React.FC<IPosts> = ({
 
   const editPosts = () =>{
     dispatch(editPost(_id))
+  }
+
+  const likeOrUnlikePost = () =>{
+    if(likes.includes(currentUser._id)){
+      dispatch(postUnLike({_id,  userId: currentUser._id}))
+    }else{
+      dispatch(postLike({_id,  userId: currentUser._id}))
+    }
   }
 
   const whatTime = () => {
@@ -53,7 +62,7 @@ const Post: React.FC<IPosts> = ({
           </div>
           <p className="p">{user.username}</p>
           <div className="Post__changer">
-            {username === user.username && (
+            {currentUser.username === user.username && (
               <>
                 <button
                   className="Post__change"
@@ -94,21 +103,21 @@ const Post: React.FC<IPosts> = ({
       <div className="Post__text">
         <div className="Post__icons">
           <div className="Post__left">
-            <div>
-              <img src={like} alt="" />
-            </div>
-            <div>
+            <button onClick={likeOrUnlikePost}>
+              <img src={`${likes.includes(currentUser._id) ? likeTrue : like}`} alt="" />
+            </button>
+            <button>
               <img src={komments} alt="" />
-            </div>
-            <div>
+            </button>
+            <button>
               <img src={share} alt="" />
-            </div>
+            </button>
           </div>
-          <div className="Post__right">
+          <button className="Post__right">
             <img src={favorit} alt="" />
-          </div>
+          </button>
         </div>
-        <div className="Post__likes">{likes} likes</div>
+        <div className="Post__likes">{likes.length} likes</div>
         <div className="Post__comments">
           <p>{user.username}</p>
           <ReadMore len={250}>{description}</ReadMore>

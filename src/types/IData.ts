@@ -9,7 +9,7 @@ export interface IPosts {
     avatar: string;
   }
   created_at: number;
-  likes: number;
+  likes: string[];
 
 }
 

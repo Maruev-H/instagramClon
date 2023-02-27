@@ -27,6 +27,7 @@ export const deletePost = createAsyncThunk<string, string>(
     return _id;
   }
 );
+
 export const editPostAction = createAsyncThunk<
   IPosts,
   { _id: string; description: string }
@@ -37,3 +38,19 @@ export const editPostAction = createAsyncThunk<
   );
   return res.data;
 });
+
+export const postLike = createAsyncThunk<{_id: string, userId: string}, {_id: string, userId:string}>(
+  'posts/like', 
+  async function ({_id, userId}) {
+    const res = await baseService.post(`/posts/${_id}/like`)
+    return {_id, userId}
+  }
+)
+
+export const postUnLike = createAsyncThunk<{_id: string, userId: string}, {_id: string, userId:string}>(
+  'posts/unlike', 
+  async function ({_id, userId}) {
+    const res = await baseService.post(`/posts/${_id}/unlike`)
+    return {_id, userId}
+  }
+)
