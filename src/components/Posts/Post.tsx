@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { IPosts } from "../../types/IData";
+import { IPosts } from "../../types/IPosts";
 import "./Post.scss";
 import like from "../../pictures/PostIcons/likes.png";
 import likeTrue from "../../pictures/PostIcons/likeTrue.png";
@@ -49,11 +49,9 @@ const Post: React.FC<IPosts> = ({
     } else {
       dispatch(postLike({ _id, userId: currentUser._id }));
     }
-    console.log('asfas')
     setButtonDisabled(true);
     setTimeout(() => {
       setButtonDisabled(false);
-      console.log('timeout')
     }, 3000);
   };
 

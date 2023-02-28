@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { createPost } from "../../store/reducers/user/userActions";
+import { createPost } from "../../store/reducers/posts/postsActions";
 import "./AddPost.scss";
 import { BsArrowLeft } from "react-icons/bs";
 import smile from "../../pictures/PostIcons/smile.png";

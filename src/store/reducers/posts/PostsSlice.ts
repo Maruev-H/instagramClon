@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { postState } from "../../../types/IData";
+import { postState } from "../../../types/IPosts";
 import {
   getPosts,
   createPost,
@@ -43,7 +43,6 @@ export const postSlice = createSlice({
     //изменение постов
     builder.addCase(createPost.pending, (state) => {
       state.isLoadingPosts = true;
-      console.log("ожидаем");
     });
 
     builder.addCase(createPost.fulfilled, (state, action) => {
@@ -52,13 +51,11 @@ export const postSlice = createSlice({
     });
 
     builder.addCase(createPost.rejected, (state) => {
-      console.log("ошибка");
     });
     /* -------------------------------------------------------------------------------------------------------- */
 
     //удаление постов
     builder.addCase(deletePost.pending, (state) => {
-      console.log("ждем удаление поста");
     });
 
     builder.addCase(deletePost.fulfilled, (state, action) => {
@@ -66,17 +63,14 @@ export const postSlice = createSlice({
     });
 
     builder.addCase(deletePost.rejected, (state) => {
-      console.log("ошибка при удалении поста");
     });
     /* -------------------------------------------------------------------------------------------------------- */
 
     //изменение постов
     builder.addCase(editPostAction.pending, (state) => {
-      console.log(" ждем изменение поста");
     });
 
     builder.addCase(editPostAction.fulfilled, (state, action) => {
-      console.log("пост удален");
       state.posts = state.posts.map((post) => {
         if (post._id === action.payload._id) {
           return action.payload;
@@ -86,7 +80,6 @@ export const postSlice = createSlice({
     });
 
     builder.addCase(editPostAction.rejected, () => {
-      console.log("ошибка при изменении поста");
     });
     /* -------------------------------------------------------------------------------------------------------- */
 

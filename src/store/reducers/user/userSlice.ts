@@ -1,7 +1,7 @@
 import { createSlice,} from "@reduxjs/toolkit";
-import { cookies } from "../../../baseServis/baseService";
-import { userState } from "../../../types/IData";
-import { getUser, signIn } from "./userActions";
+import { cookies } from "../../../Api/baseService";
+import { userState } from "../../../types/IUser";
+import { logOut, signIn } from "./userActions";
 
 const initialState: userState = {
   currentUser: {
@@ -32,29 +32,25 @@ export const todoSlice = createSlice({
     });
 
     builder.addCase(signIn.rejected, (state, action) => {
-      console.log("неправильный логин или пароль");
       state.isAuth = false;
     });
      /* -------------------------------------------------------------------------------------------------------- */
 
      //проверка токена
-    builder.addCase(getUser.pending, (state) => {
+    builder.addCase(logOut.pending, (state) => {
       state.isLoading = true
       state.isAuth = false
-      console.log("ожидание")
     });
     
-    builder.addCase(getUser.fulfilled, (state, action) => {
+    builder.addCase(logOut.fulfilled, (state, action) => {
       state.isAuth = true;
       state.isLoading = false;
       state.currentUser = action.payload
-      console.log("авторизирован")
     });
     
-    builder.addCase(getUser.rejected, (state) => {
-      localStorage.removeItem('token')
+    builder.addCase(logOut.rejected, (state) => {
+      cookies.remove('token')
       state.isLoading = false
-      console.log("токен был удален")
     });
   },
    /* -------------------------------------------------------------------------------------------------------- */

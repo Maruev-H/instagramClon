@@ -4,7 +4,7 @@ import Post from './Post'
 
 export default function Posts() {
   
-    const {posts} = useAppSelector((state) => state.posts)
+    const { posts } = useAppSelector((state) => state.posts)
 
   return (
     <div className="Content">

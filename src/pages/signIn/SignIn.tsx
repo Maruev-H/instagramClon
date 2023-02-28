@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import {signIn } from "../../store/reducers/user/userActions";
 import instLogo from '../../pictures/instagram.jpg'
+import { signIn } from "../../store/reducers/user/userActions";
 import "./SignIn.scss";
 
 export default function SignIn() {
@@ -56,5 +56,3 @@ export default function SignIn() {
     </div>
   );
 }
-
-//Не удается найти модуль "../../pictures/instagram.jpg" или связанные с ним объявления типов. Почему выдает эту ошибку хотя фотография отображается. TypeScript
