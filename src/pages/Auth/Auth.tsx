@@ -1,22 +1,19 @@
-import React  from "react"
-import { Navigate, useLocation } from "react-router-dom"
-import { useAppSelector } from "../../hooks/hooks"
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAppSelector } from "../../hooks/hooks";
 
 interface AuthProps {
-    children: any
+  children: any;
 }
 
-const Auth:React.FC<AuthProps> = ({children}) => {
-  
-  const location = useLocation()
+const Auth: React.FC<AuthProps> = ({ children }) => {
+  const { isAuth } = useAppSelector((state) => state.user);
 
-  const { isAuth } = useAppSelector((state) => state.user)
-  
   if (!isAuth) {
-    return <Navigate to="/login" state={{ from: location }} />
+    return 
   }
 
-  return children
-}
+  return children;
+};
 
-export default Auth
+export default Auth;

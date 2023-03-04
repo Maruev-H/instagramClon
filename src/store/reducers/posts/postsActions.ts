@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import Cookies from "universal-cookie";
 import { baseService, cookies } from "../../../Api/baseService";
 import { IPosts } from "../../../types/IPosts";
 

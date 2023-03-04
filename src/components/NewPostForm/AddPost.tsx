@@ -4,6 +4,7 @@ import { createPost } from "../../store/reducers/posts/postsActions";
 import "./AddPost.scss";
 import { BsArrowLeft } from "react-icons/bs";
 import smile from "../../pictures/PostIcons/smile.png";
+import { Navigate, NavLink } from "react-router-dom";
 
 const AddPosts = () => {
   const [newDescription, setNewDescription] = useState("");
@@ -20,6 +21,7 @@ const AddPosts = () => {
       setNewDescription("");
       setImage(null);
       setNewImage(null);
+      window.location.href = "#";
     }
   };
 
@@ -47,7 +49,9 @@ const AddPosts = () => {
       <div className="AddForm" id="PopUp">
         <div className="AddForm__header">
           <h1>Создание публикации</h1>
-          <a href={`${image !== null ? '#PopUp2' : '#'}`}>{`${image !== null ? 'Далее' : 'Закрыть'}`}</a>
+          <a href={`${image !== null ? "#PopUp2" : "#"}`}>{`${
+            image !== null ? "Далее" : "Закрыть"
+          }`}</a>
         </div>
         <input type="file" id="input__file" onChange={handleChange} />
         <h2>Перетащите сюда фото и видео</h2>
@@ -60,11 +64,9 @@ const AddPosts = () => {
               <BsArrowLeft />
             </a>
             <h1>Создание публикации</h1>
-            <a href="#header">
-              <button  className="share"  type="button" onClick={handleSubmit}>
-                Поделиться
-              </button>
-            </a>
+            <button className="share" onClick={handleSubmit} type="button">
+              Поделиться
+            </button>
           </div>
         </div>
         <div className="AddForm__Wrapper">

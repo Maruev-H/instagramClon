@@ -6,35 +6,34 @@ import smile from "../../pictures/PostIcons/smile.png";
 import { editPostAction } from "../../store/reducers/posts/postsActions";
 
 const Edit = () => {
-
   const dispatch = useAppDispatch();
-  const { editPostId, posts } = useAppSelector((state) => state.posts); 
+  const { editPostId, posts } = useAppSelector((state) => state.posts);
   const post = posts.find((post) => post._id === editPostId);
   const [newDiscription, setNewDescription] = useState(post?.description || "");
 
   const editCompleted = (_id: string, description: string) => {
     dispatch(editPostAction({ _id, description }));
+    window.location.href = "#";
   };
 
   return (
     <div className="Edit" id="Edit">
       <div className="AddForm__header">
         <div className="Edit__headComponents">
-          <a href="#Header">
+          <a href="#">
             <BsArrowLeft />
           </a>
           <h1>Изменение публикации</h1>
-          <a href="#header">
-            <button
-              className="share"
-              type="button"
-              onClick={() => {
-                editCompleted(post?._id as string, newDiscription);
-              }}
-            >
-              Поделиться
-            </button>
-          </a>
+
+          <button
+            className="share"
+            type="button"
+            onClick={() => {
+              editCompleted(post?._id as string, newDiscription);
+            }}
+          >
+            Поделиться
+          </button>
         </div>
       </div>
       <div className="AddForm__Wrapper">
